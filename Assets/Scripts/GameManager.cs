@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool playersAreReady = false;
 
     public int WaveSize = 1;
+    public int MinZombieHealth = 10;
+    public int MaxZombieHealth = 15;
 
     /* private void Awake()
 {
@@ -63,13 +65,14 @@ playersAreReady = false;
         {
             yield return new WaitForSeconds(2);
             WaveSize += 1;
+            MaxZombieHealth += 2;
         }
     }
 
     public void SpawnZombie()
     {
         Debug.Log("Spawning Zombies");
-        spawner.Spawn(ZombiePrefab, WaveSize);
+        spawner.Spawn(ZombiePrefab, WaveSize, UnityEngine.Random.Range(MinZombieHealth,MaxZombieHealth));
     }
 
 

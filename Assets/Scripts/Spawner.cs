@@ -48,15 +48,15 @@ public class Spawner : MonoBehaviour
         InvokeRepeating("CheckIfPlayersAreDead", 0, 1f);
     }
 
-    public void Spawn(GameObject spawnableObject, int size)
+    public void Spawn(GameObject spawnableObject, int waveSize, float hp)
     {
         int zombieMoaningInd = 0;
         if (disableSpawn) return;
-        for (int i = 0; i <= size; i++)
+        for (int i = 0; i <= waveSize; i++)
         {
             zombieMoaningInd = (zombieMoaningInd + 1) % zombieMoaningList.Length;
             int rand = Random.Range(0, SpawnPoints.Length);
-            Instantiate(spawnableObject, SpawnPoints[rand]).GetComponent<Zombie>().Initilize(playerGOs, zombieMoaningInd);
+            Instantiate(spawnableObject, SpawnPoints[rand]).GetComponent<Zombie>().Initilize(playerGOs, zombieMoaningInd, hp);
         }
 
     }

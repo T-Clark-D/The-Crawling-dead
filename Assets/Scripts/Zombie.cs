@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    float health = 10;
+    float health;
     public float strength = 10;
     public List<GameObject> Players;
     public Pathing pathing;
@@ -21,8 +21,12 @@ public class Zombie : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Initilize(List<GameObject> players, int zombieInd)
+    public void Initilize(List<GameObject> players, int zombieInd, float hp)
     {
+        float sizemod = 0.25f + ((hp - 10) / 30);
+        transform.localScale = new Vector3(sizemod, sizemod, 0);
+        health = hp;
+
         audioSource = GetComponent<AudioSource>();
         Players = players;
         pathing.enabled = true;
