@@ -12,6 +12,7 @@ public class GunController : MonoBehaviour
     public ProjectileManager bulletManager;
 
     public GameObject Bullet;
+    public Player player;
 
     public float Angle;
 
@@ -25,7 +26,7 @@ public class GunController : MonoBehaviour
 
     internal void Fire()
     {
-        projectileManger.Fire(transform.position, Angle, lastAimDirection.normalized, Bullet);
+        projectileManger.Fire(transform.position, Angle, lastAimDirection.normalized, Bullet, player);
     }
 
     // Update is called once per frame

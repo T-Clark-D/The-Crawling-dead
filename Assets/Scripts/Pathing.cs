@@ -22,16 +22,25 @@ public class Pathing : MonoBehaviour
 
     public void UpdateTarget()
     {
-        if(CurrentTarget == null)
+        if (zombie.Players.Count == 0)
         {
-            CurrentTarget = zombie.Players[0].transform;
+            return;
         }
+
+        Transform closestTarget = zombie.Players[0].transform;
+
         foreach (GameObject player in zombie.Players)
         {
-            if ((transform.position - player.transform.position).magnitude < (transform.position - CurrentTarget.position).magnitude)
+            if(player.gameObject.GetComponent<Player>().dead)
             {
-                CurrentTarget = player.transform;
+                zombie.Players.Remove(player);
+                return;
+            }
+            if ((transform.position - player.transform.position).magnitude < (transform.position - closestTarget.position).magnitude)
+            {
+                closestTarget = player.transform;
             }
         }
+        CurrentTarget = closestTarget;
     }
 }

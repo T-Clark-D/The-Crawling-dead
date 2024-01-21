@@ -24,9 +24,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire",
+                    "name": "FireHold",
                     "type": "Button",
-                    "id": "b8f0fd38-0738-4674-b4e4-31851e3d43df",
+                    "id": "e861111a-b1fc-4fab-91ed-c2dc0be0ec26",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FireRelease",
+                    "type": "Button",
+                    "id": "d6dcef6f-295a-4f03-a742-fc15a5789e2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "08cb48be-cb60-4939-b235-74ff45231ec9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "2125b263-c6bf-4307-a60d-288b0288f438",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -34,17 +61,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "f64ccb47-0d58-4f35-ad08-fd33fc767e46",
-                    "path": "<DualShockGamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "f9b99f8e-fd58-4595-aac1-e087b05e6294",
@@ -64,6 +80,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c1bb95a-d3c0-45cd-b5a5-06f757b282b9",
+                    "path": "<DualShockGamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89802d74-3de0-4ca6-8090-8fb30cfe3045",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0ff3cf3-fc8a-42f6-b9bc-46a5756354c2",
+                    "path": "<DualShockGamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f495572f-9ab5-4e06-a92b-19dd831c8982",
+                    "path": "<DualShockGamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
