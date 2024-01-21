@@ -4,32 +4,33 @@ using System.Collections;
 public class MusicManager : MonoBehaviour
 {
 
-    public AudioClip[] levelMusicChangeArray;
-
+    public AudioClip[] backgroundMusicList;
     private AudioSource audioSource;
+    private int currentTrackIndex = 0;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        PlayerPrefsManager.SetMasterVolume(1f);
         audioSource.volume = PlayerPrefsManager.GetMasterVolume();
+        PlayNextTrack();
     }
 
-    void OnLevelWasLoaded(int level)
-    {
-        AudioClip thisLevelMusic = levelMusicChangeArray[level];
-        Debug.Log("Playing clip: " + thisLevelMusic);
 
-        if (thisLevelMusic)
+    void Update()
+    {
+        if (!audioSource.isPlaying)
         {
-            audioSource.clip = thisLevelMusic;
-            audioSource.loop = true;
-            audioSource.Play();
+            PlayNextTrack();
         }
+    }
+
+    void PlayNextTrack()
+    {
+        audioSource.clip = backgroundMusicList[currentTrackIndex];
+        audioSource.Play();
+        currentTrackIndex = (currentTrackIndex + 1) % backgroundMusicList.Length;
     }
 
     public void SetVolume(float volume)

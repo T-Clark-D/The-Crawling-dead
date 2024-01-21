@@ -5,7 +5,6 @@ public class PlayerPrefsManager : MonoBehaviour
 {
 
     const string MASTER_VOLUME_KEY = "master_volume";
-    const string DIFFICULTY_KEY = "difficulty";
 
     public static void SetMasterVolume(float volume)
     {
@@ -25,20 +24,4 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
-    public static void SetDifficulty(float difficulty)
-    {
-        if (difficulty >= 1f && difficulty <= 3f)
-        {
-            PlayerPrefs.SetFloat(DIFFICULTY_KEY, difficulty);
-        }
-        else
-        {
-            Debug.LogError("Difficulty out of range");
-        }
-    }
-
-    public static float GetDifficulty()
-    {
-        return PlayerPrefs.GetFloat(DIFFICULTY_KEY);
-    }
 }
