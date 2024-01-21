@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     //public static GameManager instance;
     public bool playersAreReady = false;
 
-    public int WaveSize { get; private set; }
+    public int WaveSize = 1;
 
     /* private void Awake()
 {
@@ -34,6 +34,7 @@ playersAreReady = false;
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefsManager.SetSFXVolume(0.2f);
         StartCoroutine(WaitingForPlayerReady());
     }
 

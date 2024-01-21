@@ -7,9 +7,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    private AudioSource audioSource;
+    public AudioClip[] playerShootingList;
+    private int playerShootingInd = 0;
+
     float speed;
     public Player player;
 
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        //audioSource.volume = PlayerPrefsManager.GetSFXVolume();
+        audioSource.time = 0.2f;
+        audioSource.clip = playerShootingList[playerShootingInd];
+        playerShootingInd = (playerShootingInd + 1) % playerShootingList.Length;
+        audioSource.Play();
+    }
     public void Sign(Player playersign)
     {
         player = playersign;

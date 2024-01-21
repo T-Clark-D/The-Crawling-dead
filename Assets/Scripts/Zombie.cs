@@ -10,13 +10,24 @@ public class Zombie : MonoBehaviour
     public List<GameObject> Players;
     public Pathing pathing;
     public SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
 
-    public void Initilize(List<GameObject> players)
+
+    private AudioSource audioSource;
+    public AudioClip[] zombieMoaningList;
+    
+
+    private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Initilize(List<GameObject> players, int zombieInd)
+    {
+        audioSource = GetComponent<AudioSource>();
         Players = players;
         pathing.enabled = true;
-
+        audioSource.clip = zombieMoaningList[zombieInd];
+        audioSource.Play();
     }
 
     private void FixedUpdate()
@@ -25,7 +36,7 @@ public class Zombie : MonoBehaviour
     }
     public bool TakeDamage(float damage)
     {
-        health = health - damage;
+        health -= damage;
         if (health < 0) 
         {
             Death();

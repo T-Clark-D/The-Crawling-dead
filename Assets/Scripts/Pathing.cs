@@ -13,7 +13,14 @@ public class Pathing : MonoBehaviour
     public void Start()
     {
         InvokeRepeating("UpdateTarget",1, 1f);
-        closestTarget = zombie.Players[0].transform;
+        if(zombie.Players.Count > 0) 
+        {
+            closestTarget = zombie.Players[0].transform;
+        }
+        else
+        {
+            Debug.Log("Lose.");
+        }
     }
     void FixedUpdate()
     {

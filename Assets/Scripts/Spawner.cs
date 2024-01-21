@@ -8,13 +8,16 @@ public class Spawner : MonoBehaviour
     public Transform[] SpawnPoints;
     public Transform SpawnPointParent;
     public bool disableSpawn = false;
-    // Start is called before the first frame update
+
     public GameObject GrenadePrefab;
     public GameObject MedKitPrefab;
     public GameObject AtkSpdPrefab;
     public GameObject DmgPrefab;
 
     public Transform powerUpPointer;
+
+    private int zombieMoaningInd = 0;
+    public AudioClip[] zombieMoaningList;
 
     private void CheckIfPlayersAreDead()
     {
@@ -44,14 +47,16 @@ public class Spawner : MonoBehaviour
         }
         InvokeRepeating("CheckIfPlayersAreDead", 0, 1f);
     }
-    // Update is called once per frame
+
     public void Spawn(GameObject spawnableObject, int size)
     {
+        int zombieMoaningInd = 0;
         if (disableSpawn) return;
         for (int i = 0; i <= size; i++)
         {
+            zombieMoaningInd = (zombieMoaningInd + 1) % zombieMoaningList.Length;
             int rand = Random.Range(0, SpawnPoints.Length);
-            Instantiate(spawnableObject, SpawnPoints[rand]).GetComponent<Zombie>().Initilize(playerGOs);
+            Instantiate(spawnableObject, SpawnPoints[rand]).GetComponent<Zombie>().Initilize(playerGOs, zombieMoaningInd);
         }
 
     }
@@ -80,8 +85,4 @@ public class Spawner : MonoBehaviour
 
     }
 
-    /*public void SpawnWave(int sections, int waveLength, GameObject spawnableObject)
-    {
-
-    }*/
 }
