@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
             if (!isHolding)
                 yield return new WaitUntil(() => isHolding );
             GunController.Fire();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(player.attackspeed);
         }
         
     }

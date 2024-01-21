@@ -49,14 +49,18 @@ playersAreReady = false;
     public void StartGame()
     {
         StartCoroutine(IncreaseWaveSize());
-        InvokeRepeating("SpawnZombie", 0, 1f);
+        InvokeRepeating("SpawnZombie", 0, 2f);
+        InvokeRepeating("PowerUpDelay", 3, 3f);
     }
-
+    public void PowerUpDelay()
+    {
+        spawner.SpawnPowerUp();
+    }
     IEnumerator IncreaseWaveSize()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             WaveSize += 1;
         }
     }

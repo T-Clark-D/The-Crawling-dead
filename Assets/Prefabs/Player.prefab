@@ -389,4 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 7266433743845257847}
+  health: 100
   dead: 0
+  spriteRenderer: {fileID: 9198187015752981224}
+  spriteRendererGun: {fileID: 6085709383414091259}

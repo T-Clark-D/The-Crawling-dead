@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    int damage = 5;
     float speed;
     public Player player;
 
@@ -28,7 +27,7 @@ public class Bullet : MonoBehaviour
         }
         Zombie zombie = collision.gameObject.GetComponent<Zombie>();
         //if he dies
-        if(zombie.TakeDamage(damage))
+        if(zombie.TakeDamage(player.damage))
             player.AddToScore(10);
         else
             player.AddToScore(3);

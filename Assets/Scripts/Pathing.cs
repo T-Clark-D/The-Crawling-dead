@@ -6,17 +6,20 @@ public class Pathing : MonoBehaviour
 {
     public Zombie zombie;
     public Transform CurrentTarget;
+    Transform closestTarget;
     // Start is called before the first frame update
 
     // Update is called once per frame
     public void Start()
     {
         InvokeRepeating("UpdateTarget",1, 1f);
+        closestTarget = zombie.Players[0].transform;
     }
     void FixedUpdate()
     {
         if(CurrentTarget == null) return;
-        var targetDirection = (CurrentTarget.position - transform.position).normalized;
+        var targetDirection = (CurrentTarget.position - transform.position);
+        targetDirection = new Vector3(targetDirection.x, targetDirection.y, 0).normalized;
         transform.Translate(targetDirection * Time.deltaTime * 2f, Space.World);
     }
 
@@ -26,8 +29,6 @@ public class Pathing : MonoBehaviour
         {
             return;
         }
-
-        Transform closestTarget = zombie.Players[0].transform;
 
         foreach (GameObject player in zombie.Players)
         {

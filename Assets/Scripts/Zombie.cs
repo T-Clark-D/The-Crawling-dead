@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Zombie : MonoBehaviour
     public float strength = 10;
     public List<GameObject> Players;
     public Pathing pathing;
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
 
     public void Initilize(List<GameObject> players)
@@ -15,6 +17,11 @@ public class Zombie : MonoBehaviour
         Players = players;
         pathing.enabled = true;
 
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position= new Vector3(transform.position.x, transform.position.y, (transform.position.y+10));
     }
     public bool TakeDamage(float damage)
     {
@@ -24,7 +31,15 @@ public class Zombie : MonoBehaviour
             Death();
             return true;
         }
+        StartCoroutine(DamageIndicator());
         return false;
+    }
+
+    IEnumerator DamageIndicator()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
 
     public void Death()

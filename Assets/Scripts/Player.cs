@@ -13,7 +13,13 @@ public class Player : MonoBehaviour
     public float health = 100;
     float maxHealth = 100;
     bool immune = false;
+    public float damage = 5;
     public bool dead = false;
+    public float attackspeed = 0.2f;
+    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRendererGun;
+    public int grenadeCount = 0;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -31,13 +37,56 @@ public class Player : MonoBehaviour
             if (dead) return;
             StartCoroutine(ImmunityFrames());
         }
-
+        switch (collision.gameObject.tag)
+        {
+            case "atkspdup":
+                attackspeed = attackspeed/2;
+                Destroy(collision.gameObject);
+                break;
+            case "mdkt":
+                health = 100;
+                playerUIView.UpdateHealthBar(health, maxHealth);
+                Destroy(collision.gameObject);
+                break;
+            case "dmgup":
+                damage = damage + 10;
+                Destroy(collision.gameObject);
+                break;
+            case "grenade":
+                grenadeCount++;
+                Destroy(collision.gameObject);
+                break;
+        }
     }
 
     IEnumerator ImmunityFrames()
     {
         immune = true;
-        yield return new WaitForSeconds(1);
+        Color flash = Color.black;
+        flash.a = 0.5f;
+        spriteRenderer.color = flash;
+        spriteRendererGun.color = flash;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+        spriteRendererGun.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = flash;
+        spriteRendererGun.color = flash;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+        spriteRendererGun.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = flash;
+        spriteRendererGun.color = flash;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+        spriteRendererGun.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = flash;
+        spriteRendererGun.color = flash;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+        spriteRendererGun.color = Color.white;
         immune = false;
     }
     
