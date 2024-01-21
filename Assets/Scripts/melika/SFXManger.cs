@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SFXManger : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public LevelManager levelManager;
+    public AudioSource audioSource;
 
     public AudioClip[] zombieEatingList;
     private int zombieEatingInd = 0;
@@ -24,72 +25,95 @@ public class SFXManger : MonoBehaviour
     public AudioClip notification;
     public AudioClip headExplosion;
 
-    public void Start()
+
+    private static SFXManger instance;
+
+
+    public void Awake()
     {
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+
         PlayerPrefsManager.SetSFXVolume(1f);
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefsManager.GetSFXVolume();
         audioSource.time = 1f;
-        PlayButtonClick();
-        PlayStartGameClick();
-        PlayZombieMoanSFX();
-        PlayHeadExplosion();
     }
 
-    public void PlayButtonClick()
+    IEnumerator PlaySoundAndWait()
+    {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
+    }
+
+    public void PlayOptionsButtonClick()
     {
         audioSource.clip = buttonClick;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
+        Debug.Log("options");
     }
     public void PlayStartGameClick()
     {
         audioSource.clip = startGameClick;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
+        levelManager.LoadLevel("Game");
     }
     public void PlayHeadExplosion()
     {
         audioSource.clip = headExplosion;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
     public void PlayNotificationClick()
     {
         audioSource.clip = notification;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
     public void PlayZombieWalkSFX()
     {
         audioSource.clip = zombieWalkingList[zombieWalkingInd];
         zombieWalkingInd = (zombieWalkingInd + 1) % zombieWalkingList.Length;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
     public void PlayZombieMoanSFX()
     {
         audioSource.clip = zombieMoaningList[zombieMoaningInd];
         zombieMoaningInd = (zombieMoaningInd + 1) % zombieMoaningList.Length;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
     public void PlayZombieEatSFX()
     {
         audioSource.clip = zombieEatingList[zombieEatingInd];
         zombieEatingInd = (zombieEatingInd + 1) % zombieEatingList.Length;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
     public void PlayShootSFX()
     {
         audioSource.clip = playerShootingList[playerShootingInd];
         playerShootingInd = (playerShootingInd + 1) % playerShootingList.Length;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
     public void PlayPlayerRunSFX()
     {
         audioSource.clip = playerRunningList[playerRunningInd];
         playerRunningInd = (playerRunningInd + 1) % playerRunningList.Length;
-        audioSource.Play();
+        StartCoroutine(PlaySoundAndWait());
     }
 
 }

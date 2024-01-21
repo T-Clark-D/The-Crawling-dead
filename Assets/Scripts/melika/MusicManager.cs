@@ -7,7 +7,22 @@ public class MusicManager : MonoBehaviour
     public AudioClip[] backgroundMusicList;
     private AudioSource audioSource;
     private int currentTrackIndex = 0;
+    private static MusicManager instance;
 
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Start()
     {
