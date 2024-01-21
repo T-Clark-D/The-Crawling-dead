@@ -12,7 +12,7 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        PlayerPrefsManager.SetMasterVolume(1f);
+        PlayerPrefsManager.SetMasterVolume(0.1f);
         audioSource.volume = PlayerPrefsManager.GetMasterVolume();
         PlayNextTrack();
     }
