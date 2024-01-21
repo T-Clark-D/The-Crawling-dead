@@ -5,7 +5,7 @@ public class PlayerPrefsManager : MonoBehaviour
 {
 
     const string MASTER_VOLUME_KEY = "master_volume";
-    const string DIFFICULTY_KEY = "difficulty";
+    const string SFX_VOLUME_KEY = "SFX_volume";
 
     public static void SetMasterVolume(float volume)
     {
@@ -24,21 +24,22 @@ public class PlayerPrefsManager : MonoBehaviour
         return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
     }
 
-
-    public static void SetDifficulty(float difficulty)
+    public static void SetSFXVolume(float volume)
     {
-        if (difficulty >= 1f && difficulty <= 3f)
+        if (volume >= 0f && volume <= 1f)
         {
-            PlayerPrefs.SetFloat(DIFFICULTY_KEY, difficulty);
+            PlayerPrefs.SetFloat(SFX_VOLUME_KEY, volume);
         }
         else
         {
-            Debug.LogError("Difficulty out of range");
+            Debug.LogError("SFX volume out of range");
         }
     }
 
-    public static float GetDifficulty()
+    public static float GetSFXVolume()
     {
-        return PlayerPrefs.GetFloat(DIFFICULTY_KEY);
+        return PlayerPrefs.GetFloat(SFX_VOLUME_KEY);
     }
+
+
 }
