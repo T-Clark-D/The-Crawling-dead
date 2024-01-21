@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,20 +13,23 @@ public class GameManager : MonoBehaviour
     public GameObject ZombiePrefab;
     //public static GameManager instance;
     public bool playersAreReady = false;
-   /* private void Awake()
-    {
-        // Ensure there is only one instance of the singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        playersAreReady = false;
-    }*/
+
+    public int WaveSize { get; private set; }
+
+    /* private void Awake()
+{
+// Ensure there is only one instance of the singleton
+if (instance != null && instance != this)
+{
+Destroy(this.gameObject);
+}
+else
+{
+instance = this;
+DontDestroyOnLoad(this.gameObject);
+}
+playersAreReady = false;
+}*/
 
     // Start is called before the first frame update
     void Start()
@@ -44,13 +48,23 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        StartCoroutine(IncreaseWaveSize());
         InvokeRepeating("SpawnZombie", 0, 1f);
+    }
+
+    IEnumerator IncreaseWaveSize()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            WaveSize += 1;
+        }
     }
 
     public void SpawnZombie()
     {
         Debug.Log("Spawning Zombies");
-        spawner.Spawn(ZombiePrefab);
+        spawner.Spawn(ZombiePrefab, WaveSize);
     }
 
 
