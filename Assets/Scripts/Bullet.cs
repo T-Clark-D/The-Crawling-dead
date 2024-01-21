@@ -41,7 +41,6 @@ public class Bullet : MonoBehaviour
             return;
         }
         Zombie zombie = collision.gameObject.GetComponent<Zombie>();
-        //if he dies
         if(zombie.TakeDamage(player.damage))
             player.AddToScore(10);
         else

@@ -29,7 +29,6 @@ public class GunController : MonoBehaviour
         projectileManger.Fire(transform.position, Angle, lastAimDirection.normalized, Bullet, player);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         Vector2 aim = inputManager.AimDirection;
@@ -47,7 +46,6 @@ public class GunController : MonoBehaviour
         }
         if(aim.x < 0)
         {
-            //gun.localScale = new Vector3(gun.localScale.x, -gun.localScale.y, 1);
             gun.GetComponent<SpriteRenderer>().flipY = true;
         }
         else
@@ -57,6 +55,5 @@ public class GunController : MonoBehaviour
 
         gun.rotation = Quaternion.Euler(0, 0, angle);
         Angle = angle;
-
     }
 }

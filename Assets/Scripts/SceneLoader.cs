@@ -9,19 +9,15 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    public void LoadOptions()
-    {
-        SceneManager.LoadScene("Options");
-    }
 
     public void PlayGame()
     {
-        Debug.Log("game");
-        //SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game");
     }
+
     public void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 }

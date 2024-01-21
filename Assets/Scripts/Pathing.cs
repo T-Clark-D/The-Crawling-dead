@@ -7,9 +7,7 @@ public class Pathing : MonoBehaviour
     public Zombie zombie;
     public Transform CurrentTarget;
     Transform closestTarget;
-    // Start is called before the first frame update
 
-    // Update is called once per frame
     public void Start()
     {
         InvokeRepeating("UpdateTarget",1, 1f);
