@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Zombie : MonoBehaviour
@@ -10,6 +11,7 @@ public class Zombie : MonoBehaviour
     public List<GameObject> Players;
     public Pathing pathing;
     public SpriteRenderer spriteRenderer;
+    public float speed;
 
 
     private AudioSource audioSource;
@@ -24,6 +26,12 @@ public class Zombie : MonoBehaviour
     public void Initilize(List<GameObject> players, int zombieInd, float hp)
     {
         float sizemod = 0.25f + ((hp - 10) / 30);
+        if (sizemod > 0.8f) sizemod = 0.8f;
+        speed = health / 50;
+        if (health / 10 < 2)
+            speed = 2;
+        else speed = health / 50;
+        strength = strength + speed;
         transform.localScale = new Vector3(sizemod, sizemod, 0);
         health = hp;
 

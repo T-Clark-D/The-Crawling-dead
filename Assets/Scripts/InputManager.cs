@@ -43,7 +43,10 @@ public class InputManager : MonoBehaviour
 
     public void OnStart()
     {
-        if (player.dead) return;
+        if (player.dead|| gameManager.playersAreReady) return;
+
+        GameObject intro = GameObject.FindGameObjectWithTag("intro");
+        intro.SetActive(false);
         Debug.Log("starting");
         gameManager.playersAreReady = true;
     }

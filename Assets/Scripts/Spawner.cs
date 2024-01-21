@@ -9,7 +9,6 @@ public class Spawner : MonoBehaviour
     public Transform SpawnPointParent;
     public bool disableSpawn = false;
 
-    public GameObject GrenadePrefab;
     public GameObject MedKitPrefab;
     public GameObject AtkSpdPrefab;
     public GameObject DmgPrefab;
@@ -18,6 +17,7 @@ public class Spawner : MonoBehaviour
 
     private int zombieMoaningInd = 0;
     public AudioClip[] zombieMoaningList;
+    public GameObject Gameover;
 
     private void CheckIfPlayersAreDead()
     {
@@ -28,6 +28,7 @@ public class Spawner : MonoBehaviour
                 return;
             }
         }
+        Gameover.SetActive(true);
         disableSpawn = true;
 
 
@@ -63,18 +64,15 @@ public class Spawner : MonoBehaviour
     public void SpawnPowerUp()
     {
         GameObject chosenPowerup;
-        int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, 3);
         switch (rand)
         {
             case 0:
-                chosenPowerup = GrenadePrefab;
-                break;
+                chosenPowerup = DmgPrefab; break;
             case 1:
                 chosenPowerup = MedKitPrefab; break;
             case 2:
                 chosenPowerup = AtkSpdPrefab; break;
-            case 3:
-                chosenPowerup = DmgPrefab; break;
                 default: chosenPowerup = AtkSpdPrefab; break;
 
         }

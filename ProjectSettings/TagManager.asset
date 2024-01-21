@@ -9,6 +9,7 @@ TagManager:
   - mdkt
   - dmgup
   - grenade
+  - intro
   layers:
   - Default
   - TransparentFX

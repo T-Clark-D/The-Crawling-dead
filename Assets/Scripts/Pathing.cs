@@ -27,7 +27,7 @@ public class Pathing : MonoBehaviour
         if(CurrentTarget == null) return;
         var targetDirection = (CurrentTarget.position - transform.position);
         targetDirection = new Vector3(targetDirection.x, targetDirection.y, 0).normalized;
-        transform.Translate(targetDirection * Time.deltaTime * 2f, Space.World);
+        transform.Translate(targetDirection * Time.deltaTime * zombie.speed, Space.World);
     }
 
     public void UpdateTarget()
